@@ -1,4 +1,4 @@
-package modals;
+package models;
 
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
