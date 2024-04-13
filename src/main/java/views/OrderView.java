@@ -1,5 +1,6 @@
 package views;
 
+import Constants.Options;
 import views.Components.Input;
 
 public class OrderView{
@@ -13,7 +14,7 @@ public class OrderView{
     System.out.println("5. Exit.");
     System.out.println("-----------------------");
 
-    return Input.enterNumber("choose option", "invalid option", 1, 4);
+    return Input.enterNumber("choose option", "invalid option", Options.ADD, Options.EXIT_CHILD_MENU);
 
   }
 }
