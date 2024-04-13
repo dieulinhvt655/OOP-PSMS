@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Customer{
   private String fullName;
   private String phoneNumber;
-  private ArrayList<Order> orders;
+  private ArrayList<Order> orders = new ArrayList<>();
   private String id;
 
   public Customer(){

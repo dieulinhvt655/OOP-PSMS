@@ -56,10 +56,3 @@ public class Main{
   }
 }
 
-class Option{
-  public int option;
-
-  public Option(){
-    option = 0;
-  }
-}
