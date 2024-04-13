@@ -1,35 +1,22 @@
 package views;
 
+import views.Components.Input;
+
 import java.util.Scanner;
 
 public class Dashboard{
 
-  public static void menu() {
+  public int menu() {
     System.out.println("---------------Menu---------------");
     System.out.println("| 1. Products management     |");
     System.out.println("| 2. Customers management | ");
     System.out.println("| 3. Orders management        |");
+    System.out.println("| 4. Exit        |");
     System.out.println("-------------------------------------");
 
-    int option = enterNumber("choose an option: ", "Invalid value", 1, 3);
+    return Input.enterNumber("choose an option: ", "Invalid value", 1, 4);
 
-  }
-  public static int enterNumber(String message, String error, int min, int max) {
-    System.out.print(message + ": ");
-    Scanner scanner = new Scanner(System.in);
-
-    try{
-      int option = scanner.nextInt();
-      if ( option < min || option > max) {
-        return enterNumber(message, error, min, max);
-      }
-      return option;
-    }
-    catch(Exception exception) {
-
-      System.out.println("Error: " + error);
-      return enterNumber(message, error, min, max);
-
-    }
   }
 }
+
+

@@ -50,5 +50,15 @@ public class Customer{
   public void setId(String id){
     this.id = id;
   }
+
+  @Override
+  public String toString(){
+    return "Customer{" +
+            "fullName='" + fullName + '\'' +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            ", orders=" + orders +
+            ", id='" + id + '\'' +
+            '}';
+  }
 }
 
