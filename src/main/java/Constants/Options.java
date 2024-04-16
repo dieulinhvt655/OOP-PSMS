@@ -10,6 +10,13 @@ public class Options{
   public static final int EXIT = 4;
   public static final int EXIT_CHILD_MENU = 5;
   public static final int BACK = 4;
+  public static class Update{
+    public static final int NAME = 2;
+    public static final int PHONE = 1;
+    public static final int BOTH = 3;
+    public static final int EXIT = 4;
+
+  }
 
 
 

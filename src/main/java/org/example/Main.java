@@ -3,19 +3,12 @@ package org.example;
 import Constants.Options;
 import controllers.CustomerController;
 import data.Context;
-import models.Order;
-import services.CustomerService;
-import services.OrderService;
+import services.*;
 import views.CustomerView;
 import views.Dashboard;
 
-
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main{
   public static void main(String[] args){
-
     //context
     Context context = new Context();
     //view
@@ -29,7 +22,6 @@ public class Main{
     //main code
     int option = 0;
     do{
-
       option = dashboard.menu();
       switch(option){
         case Options.PRODUCT:
@@ -48,7 +40,6 @@ public class Main{
               case Options.EXIT_CHILD_MENU:
                 System.exit(0);
                 break;
-
             }
           }while(customerOption != Options.BACK);
           break;
@@ -58,8 +49,6 @@ public class Main{
       }
     }
     while(option != Options.EXIT);
-    System.out.println(context.getCustomers().size());
   }
-
 }
 
