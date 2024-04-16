@@ -15,5 +15,7 @@ public class CustomerService{
   public void add(Customer customer){
     customer.setId(UUID.randomUUID().toString());
     context.getCustomers().add(customer);
+    context.saveChange();
   }
+
 }

@@ -1,15 +1,20 @@
 package models;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Customer{
+public class Customer implements Serializable{
+  @Serial
+  private static final long serialVersionUID = 1L;
+
   private String fullName;
   private String phoneNumber;
   private ArrayList<Order> orders = new ArrayList<>();
   private String id;
 
-  public Customer(){
 
+  public Customer(){
   }
 
   public Customer(String fullName, String phoneNumber, ArrayList<Order> orders, String id){

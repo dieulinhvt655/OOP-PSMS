@@ -1,9 +1,14 @@
 package models;
 
 import javax.xml.crypto.Data;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Order{
+public class Order implements Serializable{
+  @Serial
+  private static final long serialVersionUID = 1L;
+
   private ArrayList<Product> products;
   private Data date;
   private double tax; // %
