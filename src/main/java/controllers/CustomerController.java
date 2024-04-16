@@ -2,6 +2,7 @@ package controllers;
 
 import models.Customer;
 import services.CustomerService;
+import views.Components.Table;
 import views.CustomerView;
 import java.util.NoSuchElementException;
 
@@ -33,5 +34,8 @@ public class CustomerController{
       }
     }
     customerView.end();
+  }
+  public void displayAll(){
+    Table.table(customerService.getAllCustomer());
   }
 }
