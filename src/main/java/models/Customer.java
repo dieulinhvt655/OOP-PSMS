@@ -1,5 +1,7 @@
 package models;
 
+import Annotations.DisplayedField;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,12 +9,12 @@ import java.util.ArrayList;
 public class Customer implements Serializable{
   @Serial
   private static final long serialVersionUID = 1L;
-
+  @DisplayedField(displayName = "Full name")
   private String fullName;
+  @DisplayedField(displayName = "Phone number")
   private String phoneNumber;
   private ArrayList<Order> orders = new ArrayList<>();
   private String id;
-
 
   public Customer(){
   }
