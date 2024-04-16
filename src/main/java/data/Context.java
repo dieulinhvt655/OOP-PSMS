@@ -30,13 +30,6 @@ public class Context implements Serializable{
     }catch(IOException | ClassNotFoundException e){
       System.err.println("Error: database load fail.");
     }
-
-  }
-
-  public Context(ArrayList<Customer> customers, ArrayList<Product> products, ArrayList<Order> orders){
-    this.customers = customers;
-    this.products = products;
-    this.orders = orders;
   }
 
   public void saveChange(){
