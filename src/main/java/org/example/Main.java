@@ -1,6 +1,7 @@
 package org.example;
 
 import Constants.Options;
+import Constants.Options.Customer;
 import controllers.CustomerController;
 import data.Context;
 import services.*;
@@ -11,6 +12,8 @@ public class Main{
   public static void main(String[] args){
     //context
     Context context = new Context();
+
+
     //view
     Dashboard dashboard = new Dashboard();
     CustomerView customerView = new CustomerView();
@@ -20,6 +23,7 @@ public class Main{
     //controller
     CustomerController customerController = new CustomerController(customerView, customerService);
     //main code
+
     int option = 0;
     do{
       option = dashboard.menu();
@@ -31,17 +35,24 @@ public class Main{
           do{
             customerOption = customerView.menu();
             switch(customerOption){
-              case Options.ADD:{
-                customerController.addCustomer();
+              case Options.Customer.ADD:{
+                customerController.add();
               }
               break;
-              case Options.UPDATE:
+              case Options.Customer.UPDATE:
+                customerController.update();
                 break;
-              case Options.EXIT_CHILD_MENU:
+              case Customer.REMOVE:
+                customerController.remove();
+                break;
+              case Options.Customer.EXIT:
                 System.exit(0);
                 break;
+              case Options.Customer.DISPLAY:
+                customerController.displayAll();
+                break;
             }
-          }while(customerOption != Options.BACK);
+          }while(customerOption != Options.Customer.BACK);
           break;
         }
         case Options.ORDER:
@@ -50,5 +61,6 @@ public class Main{
     }
     while(option != Options.EXIT);
   }
+
 }
 

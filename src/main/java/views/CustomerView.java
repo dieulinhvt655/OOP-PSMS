@@ -7,14 +7,16 @@ import views.Components.Input;
 
 public class CustomerView extends BaseView{
   public int menu(){
-    System.out.println("Menu");
+    System.out.println("Customer Management Menu:");
+    System.out.println("-----------------------");
     System.out.println("1. Add customer.");
     System.out.println("2. Update customer.");
     System.out.println("3. Remove customer.");
-    System.out.println("4. Back.");
-    System.out.println("5. Exit.");
+    System.out.println("4. Display.");
+    System.out.println("5. Back.");
+    System.out.println("6. Exit.");
     System.out.println("-----------------------");
-    return Input.enterNumber("choose option", "invalid option", Options.ADD, Options.EXIT_CHILD_MENU);
+    return Input.enterNumber("choose option", "invalid option", Options.Customer.ADD, Options.Customer.EXIT);
   }
 
   public void enterInformation(Customer customer){
@@ -25,7 +27,7 @@ public class CustomerView extends BaseView{
   }
 
   public String enterPhoneNumber(){
-    return Input.enterAString("Enter phone number");
+    return Input.enterAString("Enter phone number: ");
   }
 
   public Customer updateCustomerForm(){
@@ -54,6 +56,4 @@ public class CustomerView extends BaseView{
     }
     return customer;
   }
-
-
 }

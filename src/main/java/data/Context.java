@@ -7,6 +7,7 @@ import models.Product;
 import java.io.*;
 import java.util.ArrayList;
 
+// Serializable được yêu cầu phỉa có với những object muốn được chuyển đổi thành bin
 public class Context implements Serializable{
   @Serial
   private static final long serialVersionUID = 1L;
@@ -51,23 +52,11 @@ public class Context implements Serializable{
     return customers;
   }
 
-  public void setCustomers(ArrayList<Customer> customers){
-    this.customers = customers;
-  }
-
   public ArrayList<Product> getProducts(){
     return products;
   }
 
-  public void setProducts(ArrayList<Product> products){
-    this.products = products;
-  }
-
   public ArrayList<Order> getOrders(){
     return orders;
-  }
-
-  public void setOrders(ArrayList<Order> orders){
-    this.orders = orders;
   }
 }

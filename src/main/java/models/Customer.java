@@ -58,14 +58,5 @@ public class Customer implements Serializable{
     this.id = id;
   }
 
-  @Override
-  public String toString(){
-    return "Customer{" +
-            "fullName='" + fullName + '\'' +
-            ", phoneNumber='" + phoneNumber + '\'' +
-            ", orders=" + orders +
-            ", id='" + id + '\'' +
-            '}';
-  }
 }
 

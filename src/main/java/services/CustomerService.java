@@ -1,5 +1,6 @@
 package services;
 
+import Exceptions.DuplicatedCustomerException;
 import data.Context;
 import models.Customer;
 
@@ -14,17 +15,25 @@ public class CustomerService{
     this.context = context;
   }
 
-  public void add(Customer customer){
+  public void add(Customer customer) throws DuplicatedCustomerException{
+    if (hasCustomer(customer.getPhoneNumber())){
+      throw new DuplicatedCustomerException("Error: Phone number is existed.");
+    }
     customer.setId(UUID.randomUUID().toString());
     context.getCustomers().add(customer);
     context.saveChange();
+
   }
 
-  public void update(Customer customer) throws NoSuchElementException{
+  public void update(Customer customer, String oldPhone) throws NoSuchElementException, DuplicatedCustomerException{
+    if (hasPhoneNumberExitedExceptItsOwner(customer.getPhoneNumber(), oldPhone)) {
+      throw new DuplicatedCustomerException("Error: Phone number is existed.");
+    }
     try{
-      Customer term = context.getCustomers().stream()
-              .filter(customer1 -> customer1.getPhoneNumber().equals(customer.getPhoneNumber()))
+      var term = context.getCustomers().stream()
+              .filter(customer1 -> customer1.getPhoneNumber().equals(oldPhone))
               .findFirst().get();
+
       if(customer.getPhoneNumber() != null){
         term.setPhoneNumber(customer.getPhoneNumber());
       }
@@ -33,14 +42,26 @@ public class CustomerService{
       }
       context.saveChange();
     }catch(NoSuchElementException e){
-      throw new NoSuchElementException("Customer is not found");
+      throw e;
+//      throw new NoSuchElementException("Customer is not found");
     }
+  }
+
+  public boolean hasPhoneNumberExitedExceptItsOwner(String phoneNumber, String oldNumber){
+    return context.getCustomers().stream().filter(customer -> !customer.getPhoneNumber().equals(oldNumber)).anyMatch(customer -> customer.getPhoneNumber().equals(phoneNumber));
   }
 
   public boolean hasCustomer(String phoneNumber){
     return context.getCustomers().stream().anyMatch(customer -> customer.getPhoneNumber().equals(phoneNumber));
   }
+
   public ArrayList<Customer> getAllCustomer(){
     return context.getCustomers();
+  }
+
+  public void remove(String phone){
+    context.getCustomers().removeIf(customer -> customer.getPhoneNumber().equals(phone));
+    context.saveChange();
+
   }
 }
