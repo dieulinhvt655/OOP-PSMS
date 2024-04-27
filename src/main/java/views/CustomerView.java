@@ -18,7 +18,7 @@ public class CustomerView extends BaseView{
     System.out.println("-----------------------");
     return Input.enterNumber("choose option", "invalid option", Options.Customer.ADD, Options.Customer.EXIT);
   }
-
+// add
   public void enterInformation(Customer customer){
     String name = Input.enterAString("Enter customer's name: ");
     String phoneNumber = Input.enterAString("Enter customer's phone number: ");
@@ -29,7 +29,7 @@ public class CustomerView extends BaseView{
   public String enterPhoneNumber(){
     return Input.enterAString("Enter phone number: ");
   }
-
+// update
   public Customer updateCustomerForm(){
     Customer customer = new Customer();
     System.out.println("---------------------------");

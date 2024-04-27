@@ -14,8 +14,7 @@ public class ProductView{
     System.out.println("5. Back.");
     System.out.println("6. Exit.");
     System.out.println("-----------------------");
-
     return Input.enterNumber("choose option", "invalid option", Options.Product.ADD, Options.Product.EXIT);
-
   }
+
 }
