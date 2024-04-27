@@ -35,7 +35,11 @@ public class Options{
     public static final int PHONE = 1;
     public static final int BOTH = 3;
     public static final int EXIT = 4;
-
+    public static final int NAMEP=1;
+    public  static final int  DESCRIPTION=2;
+    public  static final int PRICE=3;
+    public  static final int QUANTITY=4;
+    public static final int EXITP=5;
   }
 
 

@@ -1,12 +1,16 @@
 package models;
 
+import Annotations.DisplayedField;
+
 import java.io.Serial;
 import java.io.Serializable;
 
 public class Product implements Serializable{
   @Serial
   private static final long serialVersionUID = 1L;
+  @DisplayedField(displayName = "ID")
   private String id;
+  @DisplayedField(displayName = "Name")
   private String name;
   private String description; //  mo ta
   private double price; // gia
