@@ -5,6 +5,8 @@ import Constants.Options.Update;
 import models.Customer;
 import views.Components.Input;
 
+import java.util.function.Function;
+
 public class CustomerView extends BaseView{
   public int menu(){
     System.out.println("Customer Management Menu:");
@@ -26,8 +28,16 @@ public class CustomerView extends BaseView{
     customer.setPhoneNumber(phoneNumber);
   }
 
-  public String enterPhoneNumber(){
-    return Input.enterAString("Enter phone number: ");
+  public String enterPhoneNumber(Function<String, Boolean> condition){
+    String phone;
+    do{
+      phone = Input.enterAString("Enter phone number: ");
+      if(condition.apply(phone)){
+        return phone;
+      }else {
+        System.out.println("No customer found, try again");
+      }
+    }while(true);
   }
 
   public Customer updateCustomerForm(){

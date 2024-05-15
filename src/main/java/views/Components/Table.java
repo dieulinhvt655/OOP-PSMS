@@ -4,9 +4,12 @@ import Annotations.DisplayedField;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class Table{
   public static <T> void table(ArrayList<T> objects){//[{a:1, b:"jkk"},{a:4},{a:0}]
+
+    if(objects.isEmpty()) throw new NoSuchElementException("The table is empty");
     //[a,b]
     System.out.print("|  No  ");
     for(Field field : objects.getFirst().getClass().getDeclaredFields()){

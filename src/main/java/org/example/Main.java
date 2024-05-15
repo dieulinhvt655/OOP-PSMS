@@ -2,33 +2,52 @@ package org.example;
 
 import Constants.Options;
 import Constants.Options.Customer;
+import Constants.Options.Product;
 import controllers.CustomerController;
+import controllers.OrderController;
+import controllers.ProductController;
 import data.Context;
-import services.*;
+import services.CustomerService;
+import services.OrderService;
+import services.ProductService;
 import views.CustomerView;
 import views.Dashboard;
+import views.OrderView;
+import views.ProductView;
 
 public class Main{
   public static void main(String[] args){
+    //Config dependency injection
     //context
     Context context = new Context();
-
-
     //view
     Dashboard dashboard = new Dashboard();
     CustomerView customerView = new CustomerView();
+    OrderView orderView = new OrderView();
+    ProductView productView = new ProductView();
     //services
     CustomerService customerService = new CustomerService(context);
-    OrderService orderService = new OrderService(context);
+    OrderService orderService = new OrderService(context, customerService);
+    ProductService productService = new ProductService(context);
     //controller
     CustomerController customerController = new CustomerController(customerView, customerService);
+    ProductController productController = new ProductController(productView, productService);
+    OrderController orderController = new OrderController(orderService, orderView, productService, productView, customerView, customerService);
     //main code
-
     int option = 0;
     do{
       option = dashboard.menu();
       switch(option){
         case Options.PRODUCT:
+          int productOption = 0;
+          do{
+            productOption = productView.menu();
+            switch(productOption){
+              case Product.ADD :{
+                productController.add();
+              }
+            }
+          }while(false);
           break;
         case Options.CUSTOMER:{
           int customerOption = 0;
@@ -61,6 +80,5 @@ public class Main{
     }
     while(option != Options.EXIT);
   }
-
 }
 
