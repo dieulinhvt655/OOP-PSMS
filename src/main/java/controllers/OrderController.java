@@ -1,6 +1,8 @@
 package controllers;
 
+import Constants.Options.Order.Update;
 import Exceptions.CustomerNotFoundException;
+import Exceptions.OrderNotFoundException;
 import data.Context;
 import models.DTO.PaidOrderDTO;
 import models.Order;
@@ -14,6 +16,7 @@ import views.CustomerView;
 import views.OrderView;
 import views.ProductView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -57,7 +60,7 @@ public class OrderController{
     var customerPhone = customerView.enterPhoneNumber(customerService::hasCustomerPhoneNumber);
     var customerName = customerService.getCustomer(customerPhone).getFullName();
     try{
-      Table.table((ArrayList<PaidOrderDTO>) orderService.getOrders(customerPhone).stream()
+      Table.table(orderService.getOrders(customerPhone).stream()
               .filter(Order::isPaid)
               .map(order -> new PaidOrderDTO(order, customerName))
               .collect(Collectors.toList()));
@@ -66,11 +69,30 @@ public class OrderController{
     }
   }
 
-  public void displayDraftOrder(){
+  public void updateDraftOrder(){
+    var customerPhone = customerView.enterPhoneNumber(customerService::hasCustomerPhoneNumber);
+    var customerName = customerService.getCustomer(customerPhone).getFullName();
+    try{
+      var currentOrder = orderService.getCurrentOrder(customerPhone);
+      orderView.orderForm(new PaidOrderDTO(currentOrder, customerName));
+      var option = orderView.orderFromMenu();
+      switch(option){
+        case Update.CHANGE_PRODUCT_INFO:{
+          var productIndex = Input.enterNumber("Choose product", "Product not found", 1, currentOrder.getProducts().size());
+          var product = currentOrder.getProducts().get(productIndex - 1);
+          var productStore = productService.getProduct(product.getId());
+          orderView.editProductInfo(product, productStore);
+        }
+      }
+      orderService.update(currentOrder);
+      new ProcessBuilder("clear").inheritIO().start().waitFor();
+    }catch(CustomerNotFoundException | OrderNotFoundException | IOException | InterruptedException e){
+      System.out.println(e.getMessage());
+    }
   }
 
   public static void main(String[] args){
     new OrderController(new OrderService(new Context(), new CustomerService(new Context())), new OrderView(), new ProductService(new Context()), new ProductView(), new CustomerView(), new CustomerService(new Context()))
-            ;
+            .updateDraftOrder();
   }
 }

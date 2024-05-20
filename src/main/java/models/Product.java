@@ -4,6 +4,7 @@ import Annotations.DisplayedField;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.function.Function;
 
 public class Product implements Serializable{
   @Serial
@@ -66,5 +67,9 @@ public class Product implements Serializable{
 
   public void setQuantity(int quantity){
     this.quantity = quantity;
+  }
+
+  public void setQuantity(Function<Integer, Integer> set){
+    this.quantity = set.apply(this.quantity);
   }
 }
