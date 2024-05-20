@@ -1,15 +1,21 @@
 package models;
 
+import Annotations.DisplayedField;
+
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.function.Function;
 
 public class Product implements Serializable{
   @Serial
   private static final long serialVersionUID = 1L;
   private String id;
+  @DisplayedField(displayName = "Name")
   private String name;
-  private String description; //  mo ta
+  private String description;
+  @DisplayedField(displayName = "Price")//  mo ta
   private double price; // gia
+  @DisplayedField(displayName = "Available")
   private int quantity; // so luong
 
   public Product(){
@@ -61,5 +67,9 @@ public class Product implements Serializable{
 
   public void setQuantity(int quantity){
     this.quantity = quantity;
+  }
+
+  public void setQuantity(Function<Integer, Integer> set){
+    this.quantity = set.apply(this.quantity);
   }
 }

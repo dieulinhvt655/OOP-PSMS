@@ -34,18 +34,14 @@ public class CustomerController{
 
   public void update(){
     customerView.start();
-    String phone = customerView.enterPhoneNumber();
-    if(customerService.hasCustomer(phone)){
+    String phone = customerView.enterPhoneNumber(customerService::hasCustomerPhoneNumber);
       try{
         customerService.update(customerView.updateCustomerForm(), phone);
         System.out.println("Update successfully.");
       }catch(NoSuchElementException | DuplicatedCustomerException e ){
         System.err.println(e.getMessage());
       }
-    }
-    else {
-      System.out.printf("Error: Customer not found.");
-    }
+
     customerView.end();
   }
 
@@ -54,8 +50,8 @@ public class CustomerController{
   }
   public void remove() {
     customerView.start();
-    String phone = customerView.enterPhoneNumber();
-    if (customerService.hasCustomer(phone)) {
+    String phone = customerView.enterPhoneNumber((phone2)->false);
+    if (customerService.hasCustomerPhoneNumber(phone)) {
       customerService.remove(phone);
       System.out.println("Customer was removed.");
     }

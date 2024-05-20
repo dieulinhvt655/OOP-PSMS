@@ -1,9 +1,18 @@
 package views;
 
+import Annotations.DisplayedField;
 import Constants.Options;
 import Constants.Options.Update;
 import models.Customer;
+import models.DTO.Anonymous;
+import models.DTO.PaidOrderDTO;
+import models.Order;
 import views.Components.Input;
+import views.Components.Table;
+
+import javax.swing.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CustomerView extends BaseView{
   public int menu(){
@@ -26,8 +35,16 @@ public class CustomerView extends BaseView{
     customer.setPhoneNumber(phoneNumber);
   }
 
-  public String enterPhoneNumber(){
-    return Input.enterAString("Enter phone number: ");
+  public String enterPhoneNumber(Function<String, Boolean> condition){
+    String phone;
+    do{
+      phone = Input.enterAString("Enter phone number: ");
+      if(condition.apply(phone)){
+        return phone;
+      }else {
+        System.out.println("No customer found, try again");
+      }
+    }while(true);
   }
 // update
   public Customer updateCustomerForm(){
@@ -56,4 +73,21 @@ public class CustomerView extends BaseView{
     }
     return customer;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
