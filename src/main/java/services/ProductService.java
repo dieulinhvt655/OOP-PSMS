@@ -24,13 +24,13 @@ public class ProductService{
     context.saveChange();
   }
 
-  public void update(Product product, String oldD) throws NoSuchElementException, DuplicatedCustomerException{
-    if(hasIDExitedExcepItsOwner(product.getId(), oldD)){
-      throw new DuplicatedCustomerException("Error: ID is existed. ");
+  public void update(Product product) throws NoSuchElementException, DuplicatedCustomerException{
+    if(!hasProduct(product.getId())){
+      throw new NoSuchElementException("Error: Product is not found. ");
     }
     try{
       var term = context.getProducts().stream()
-              .filter(product1 -> product1.getDescription().equals(oldD))
+              .filter(product1 -> product1.getId().equals(product.getId()))
               .findFirst().get();
       if(product.getDescription() != null){
         term.setDescription(product.getDescription());
@@ -75,5 +75,10 @@ public class ProductService{
             .filter(product -> id.equals(product.getId()))
             .findFirst()
             .get();
+  }
+
+  public static void main(String[] args){
+    var p = new Product();
+    System.out.println(p.getPrice());
   }
 }

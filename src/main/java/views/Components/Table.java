@@ -1,44 +1,69 @@
 package views.Components;
 
 import Annotations.DisplayedField;
+import Annotations.IsDate;
+import utils.DateTime;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static java.lang.System.out;
+
 public class Table{
   public static <T> void table(List<T> objects){//[{a:1, b:"jkk"},{a:4},{a:0}]
-
+    out.print(" ______");
+    for(Field field : objects.getFirst().getClass().getDeclaredFields()){
+      DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
+      if(displayedField != null)
+        out.print("_______________________");
+    }
+    out.println(" ");
     if(objects.isEmpty()) throw new NoSuchElementException("The table is empty");
     //[a,b]
-    System.out.print("|  No  ");
+    out.print("|  No  ");
+    for(Field field : objects.getFirst().getClass().getDeclaredFields()){
+      DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
+      if(displayedField != null){
+        out.printf("|%20s  ", displayedField.displayName());
+      }
+    }
+    out.println("|");
+    out.print("|______");
     for(Field field : objects.getFirst().getClass().getDeclaredFields()){
       DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
       if(displayedField != null)
-        System.out.printf("|%20s  ", displayedField.displayName());
+        out.print("_______________________");
     }
-    System.out.println("|");
-    System.out.print("|______");
-    for(Field field : objects.getFirst().getClass().getDeclaredFields()){
-      DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
-      if(displayedField != null)
-        System.out.print("_______________________");
-    }
-    System.out.println("|");
+    out.println("|");
     for(int i = 0; i < objects.size(); i++){
-      System.out.printf("|%6d", i+1);
+      out.printf("|%6d", i + 1);
       for(Field field : objects.get(i).getClass().getDeclaredFields()){
         DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
+        IsDate isDate = field.getAnnotation(IsDate.class);
         if(displayedField != null){
           try{
             field.setAccessible(true);
-            System.out.printf("|%20s  ", field.get(objects.get(i)));
+            var value = field.get(objects.get(i));
+            out.printf("|%20s  ", isDate != null && value != null ? DateTime.getDateAfterFormated((Date) value) : value);
           }catch(IllegalArgumentException | IllegalAccessException e){
           }
         }
       }
-      System.out.println("|");
+      out.println("|");
     }
+    System.out.print(" ------");
+    for(Field field : objects.getFirst().getClass().getDeclaredFields()){
+      DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
+      if(displayedField != null)
+        System.out.print("-----------------------");
+    }
+    System.out.println(" ");
+  }
+
+  public static <T> void table(List<T> objects, String title){
+    out.println(title.toUpperCase());
+    table(objects);
   }
 }

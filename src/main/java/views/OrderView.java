@@ -26,23 +26,23 @@ public class OrderView extends BaseView{
   }
 
   public void orderForm(PaidOrderDTO order){
-    start();
-    Table.table(order.getProducts().stream().map(ord -> new Anonymous(){
-      @DisplayedField(displayName = "Name")
-      String name = ord.getName();
-      @DisplayedField(displayName = "Price ($)")
-      double price = ord.getPrice();
-      @DisplayedField(displayName = "Quantity")
-      int quantity = ord.getQuantity();
-    }).collect(Collectors.toList()));
+    Table.table(order.getProducts().stream()
+            .map(ord -> new Anonymous(){
+              @DisplayedField(displayName = "Name")
+              String name = ord.getName();
+              @DisplayedField(displayName = "Price ($)")
+              double price = ord.getPrice();
+              @DisplayedField(displayName = "Quantity")
+              int quantity = ord.getQuantity();
+            }).collect(Collectors.toList())
+    ,"detail");
     System.out.println("Customer: " + order.getCustomerName());
     System.out.println("Total: $" + order.getTotalPrice());
-    end();
   }
 
   public int orderFromMenu(){
-    System.out.println("1. Change product info, 2. Change buyer info, 3.Back, 4. Exit");
-    var option = Input.enterNumber("Choose a option", "Invalid option", 1, 4);
+    System.out.println("1. Choose new product\n2. Change product info\n3. Buy\n4.Back\n5. Exit");
+    var option = Input.enterNumber("Choose a option", "Invalid option", 1, 6);
     return option;
   }
 

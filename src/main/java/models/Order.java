@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class Order implements Serializable{
   @Serial
@@ -16,6 +17,7 @@ public class Order implements Serializable{
   private boolean isPaid = false;
 
   public Order(){
+    products = new ArrayList<>();
   }
 
   public Order(int Id, ArrayList<Product> products, Date date, double tax, String customerId, boolean isPaid){
@@ -55,7 +57,8 @@ public class Order implements Serializable{
   }
 
   public ArrayList<Product> getProducts(){
-    return products;
+    products.removeIf(product -> product.getQuantity() == 0);
+    return this.products;
   }
 
   public void setProducts(ArrayList<Product> products){
@@ -76,5 +79,9 @@ public class Order implements Serializable{
 
   public void setTax(double tax){
     this.tax = tax;
+  }
+
+  public void addProducts(ArrayList<Product> products){
+    this.products.addAll(products);
   }
 }

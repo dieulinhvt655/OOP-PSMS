@@ -1,6 +1,7 @@
 package models.DTO;
 
 import Annotations.DisplayedField;
+import Annotations.IsDate;
 import models.Order;
 import models.Product;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class PaidOrderDTO{
+  @DisplayedField(displayName = "ID")
   private int Id;
   private String customerId;
   private ArrayList<Product> products;
@@ -17,16 +19,20 @@ public class PaidOrderDTO{
   @DisplayedField(displayName = "Total")
   private double totalPrice;
   @DisplayedField(displayName = "Date")
+  @IsDate
   private Date date;
+  private boolean isPaid = false;
 
   public PaidOrderDTO(){
   }
 
   public PaidOrderDTO(Order order, String customerName){
+
     this.Id = order.getId();
     this.customerId = order.getCustomerId();
     this.customerName = customerName;
     this.date = order.getDate();
+    this.isPaid = order.isPaid();
     this.products = order.getProducts();
     this.totalPrice = products.stream().map(product -> product.getPrice()*product.getQuantity()).reduce(0.0, Double::sum);
   }
@@ -38,6 +44,18 @@ public class PaidOrderDTO{
     this.customerName = customerName;
     this.totalPrice = totalPrice;
     this.date = date;
+  }
+
+  public void setTotalPrice(double totalPrice){
+    this.totalPrice = totalPrice;
+  }
+
+  public boolean isPaid(){
+    return isPaid;
+  }
+
+  public void setPaid(boolean paid){
+    isPaid = paid;
   }
 
   public int getId(){

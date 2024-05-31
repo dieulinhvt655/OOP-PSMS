@@ -6,7 +6,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.function.Function;
 
-public class Product implements Serializable{
+public class Product implements Serializable, Cloneable{
   @Serial
   private static final long serialVersionUID = 1L;
   private String id;
@@ -71,5 +71,14 @@ public class Product implements Serializable{
 
   public void setQuantity(Function<Integer, Integer> set){
     this.quantity = set.apply(this.quantity);
+  }
+
+  @Override
+  public Product clone(){
+    try{
+      return (Product) super.clone();
+    }catch(CloneNotSupportedException e){
+      throw new AssertionError();
+    }
   }
 }

@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 public class CustomerService{
-  Context context;
+  private final Context context;
 
   public CustomerService(Context context){
     this.context = context;

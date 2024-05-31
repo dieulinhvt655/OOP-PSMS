@@ -2,6 +2,7 @@ package org.example;
 
 import Constants.Options;
 import Constants.Options.Customer;
+import Constants.Options.Order;
 import Constants.Options.Product;
 import controllers.CustomerController;
 import controllers.OrderController;
@@ -43,11 +44,27 @@ public class Main{
           do{
             productOption = productView.menu();
             switch(productOption){
-              case Product.ADD :{
+              case Product.ADD:{
                 productController.add();
+                break;
+              }
+              case Product.EXIT:{
+                System.exit(0);
+              }
+              case Product.DISPLAY:{
+                productController.displayAll();
+                break;
+              }
+              case Product.REMOVE:{
+                productController.remove();
+                break;
+              }
+              case Product.UPDATE:{
+                productController.update();
+                break;
               }
             }
-          }while(false);
+          }while(productOption != Product.BACK);
           break;
         case Options.CUSTOMER:{
           int customerOption = 0;
@@ -74,8 +91,33 @@ public class Main{
           }while(customerOption != Options.Customer.BACK);
           break;
         }
-        case Options.ORDER:
+        case Options.ORDER:{
+          int orderOption = 0;
+          do{
+            orderOption = orderView.menu();
+            switch(orderOption){
+              case Order.ADD:{
+                orderController.createOrder();
+                break;
+              }
+              case Order.UPDATE:{
+                orderController.updateDraftOrder();
+                break;
+              }
+              case Order.REMOVE:{
+                break;
+              }
+              case Order.DISPLAY:{
+                orderController.displayPaidOrder();
+                break;
+              }
+              case Order.EXIT:{
+                System.exit(0);
+              }
+            }
+          }while(orderOption != Order.BACK);
           break;
+        }
       }
     }
     while(option != Options.EXIT);

@@ -58,6 +58,7 @@ public class ProductView extends BaseView{
         break;
       case Options.Update.QUANTITY:
         int quantity=Input.enterNumber("Enter product's quantity( >0|| <1000)","ERROR",0,1000);
+        product.setQuantity(quantity);
         break;
       case Options.Update.EXITP:
         break;
