@@ -27,9 +27,9 @@ public class Context implements Serializable{
       fileIn.close();
       System.out.println("load db success.");
     }catch(EOFException e){
-      System.err.println("db empty");
+      System.out.println("db empty");
     }catch(IOException | ClassNotFoundException e){
-      System.err.println("Error: database load fail.");
+      System.out.println("Error: database load fail.");
     }
   }
 
@@ -41,9 +41,9 @@ public class Context implements Serializable{
       fileOutputStream.close();
       objectOutputStream.close();
     }catch(FileNotFoundException e){
-      System.err.println("Error: save change fail. DB not found");
+      System.out.println("Error: save change fail. DB not found");
     }catch(IOException e){
-      System.err.println("Error: save change fail");
+      System.out.println("Error: save change fail");
       System.out.println(e.getMessage());
     }
   }

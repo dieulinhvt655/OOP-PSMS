@@ -42,7 +42,7 @@ public class CustomerView extends BaseView{
       if(condition.apply(phone)){
         return phone;
       }else {
-        System.out.println("No customer found, try again");
+        System.out.println("Error: No customer found, try again");
       }
     }while(true);
   }

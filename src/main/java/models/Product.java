@@ -33,7 +33,9 @@ public class Product implements Serializable, Cloneable{
     return id;
   }
 
-  public void setId(String id){this.id = id;}
+  public void setId(String id){
+    this.id = id;
+  }
 
   public String getName(){
     return name;
@@ -74,9 +76,7 @@ public class Product implements Serializable, Cloneable{
   @Override
   public Product clone(){
     try{
-      Product clone = (Product) super.clone();
-      // TODO: copy mutable state here, so the clone can't change the internals of the original
-      return clone;
+      return (Product) super.clone();
     }catch(CloneNotSupportedException e){
       throw new AssertionError();
     }

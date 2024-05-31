@@ -3,6 +3,7 @@ package controllers;
 import Exceptions.DuplicatedCustomerException;
 import models.Customer;
 import services.CustomerService;
+import views.Components.Input;
 import views.Components.Table;
 import views.CustomerView;
 
@@ -24,39 +25,37 @@ public class CustomerController{
     try{
       customerService.add(customer);
       System.out.println("Add successfully");
-    }
-    catch(DuplicatedCustomerException exception) {
-      System.err.println(exception.getMessage());
+    }catch(DuplicatedCustomerException exception){
+      System.out.println(exception.getMessage());
     }
     customerView.end();
-
   }
 
   public void update(){
     customerView.start();
     String phone = customerView.enterPhoneNumber(customerService::hasCustomerPhoneNumber);
-      try{
-        customerService.update(customerView.updateCustomerForm(), phone);
-        System.out.println("Update successfully.");
-      }catch(NoSuchElementException | DuplicatedCustomerException e ){
-        System.err.println(e.getMessage());
-      }
-
+    try{
+      customerService.update(customerView.updateCustomerForm(), phone);
+      System.out.println("Update successfully.");
+    }catch(NoSuchElementException | DuplicatedCustomerException e){
+      System.out.println(e.getMessage());
+    }
     customerView.end();
   }
 
   public void displayAll(){
     Table.table(customerService.getAllCustomer());
   }
-  public void remove() {
+
+  public void remove(){
     customerView.start();
-    String phone = customerView.enterPhoneNumber((phone2)->false);
-    if (customerService.hasCustomerPhoneNumber(phone)) {
+    String phone = customerView.enterPhoneNumber((phone2) -> customerService.hasCustomerPhoneNumber(phone2));
+    var option = Input.enterNumber("Are you sure to remove this customer(1. Yes, 2. No)?", "Invalid. Choose again", 1, 2);
+    if(option != 2){
       customerService.remove(phone);
       System.out.println("Customer was removed.");
+      return;
     }
-    else {
-      System.out.println("Error: not found");
-    }
+    System.out.println("Removal aborted");
   }
 }
