@@ -12,7 +12,6 @@ public class Order implements Serializable{
   private int Id;
   private ArrayList<Product> products;
   private Date date;
-  private double tax; // %
   private String customerId;
   private boolean isPaid = false;
 
@@ -23,7 +22,6 @@ public class Order implements Serializable{
   public Order(int Id, ArrayList<Product> products, Date date, double tax, String customerId, boolean isPaid){
     this.products = products;
     this.date = date;
-    this.tax = tax;
     this.customerId = customerId;
     this.isPaid = isPaid;
     this.Id = Id;
@@ -71,14 +69,6 @@ public class Order implements Serializable{
 
   public void setDate(Date date){
     this.date = date;
-  }
-
-  public double getTax(){
-    return tax;
-  }
-
-  public void setTax(double tax){
-    this.tax = tax;
   }
 
   public void addProducts(ArrayList<Product> products){

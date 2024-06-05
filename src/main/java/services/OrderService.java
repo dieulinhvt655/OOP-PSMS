@@ -93,5 +93,16 @@ public class OrderService implements BaseService{
     context.saveChange();
   }
 
+  public void remove(Order order) {
+    context.getOrders().removeIf(order1 -> order1.getId() == order.getId());
+    context.saveChange();
+  }
+
+  public List<Product> displayProduct(){
+    return context.getProducts();
+  }
+
+
+
 }
 

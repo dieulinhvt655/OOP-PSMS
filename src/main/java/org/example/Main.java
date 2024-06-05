@@ -8,9 +8,11 @@ import controllers.CustomerController;
 import controllers.OrderController;
 import controllers.ProductController;
 import data.Context;
+import models.DTO.Anonymous;
 import services.CustomerService;
 import services.OrderService;
 import services.ProductService;
+import views.Components.Table;
 import views.CustomerView;
 import views.Dashboard;
 import views.OrderView;
@@ -34,7 +36,7 @@ public class Main{
     CustomerController customerController = new CustomerController(customerView, customerService);
     ProductController productController = new ProductController(productView, productService);
     OrderController orderController = new OrderController(orderService, orderView, productService, productView, customerView, customerService);
-    //main code
+//    //main code
     int option = 0;
     do{
       option = dashboard.menu();
@@ -105,6 +107,7 @@ public class Main{
                 break;
               }
               case Order.REMOVE:{
+                orderController.removeOrder();
                 break;
               }
               case Order.DISPLAY:{
@@ -121,6 +124,7 @@ public class Main{
       }
     }
     while(option != Options.EXIT);
+
   }
 }
 

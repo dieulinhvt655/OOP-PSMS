@@ -14,7 +14,7 @@ public class Context implements Serializable{
   private ArrayList<Customer> customers = new ArrayList<>();
   private ArrayList<Product> products = new ArrayList<>();
   private ArrayList<Order> orders = new ArrayList<>();
-
+  // context quản lý kết nối (saveChange), truy vấn lưu trữ dữ liệu
   public Context(){
     try{
       FileInputStream fileIn = new FileInputStream("storage/database.bin");

@@ -1,5 +1,5 @@
 package services;
-
+// service dùng để tương tác với dữ liệu truy vấn, chỉnh sửa (update/remove/create)
 import Exceptions.CustomerNotFoundException;
 import Exceptions.DuplicatedCustomerException;
 import data.Context;
@@ -8,14 +8,15 @@ import models.Customer;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.UUID;
-
+// instance
 public class CustomerService{
   private final Context context;
 
   public CustomerService(Context context){
     this.context = context;
-  }
 
+  }
+  // thêm 1 khách hàng mới
   public void add(Customer customer) throws DuplicatedCustomerException{
     if(hasCustomerPhoneNumber(customer.getPhoneNumber())){
       throw new DuplicatedCustomerException("Error: Phone number is existed.");
@@ -24,7 +25,6 @@ public class CustomerService{
     context.getCustomers().add(customer);
     context.saveChange();
   }
-
   public void update(Customer customer, String oldPhone) throws NoSuchElementException, DuplicatedCustomerException{
     if(hasPhoneNumberExitedExceptItsOwner(customer.getPhoneNumber(), oldPhone)){
       throw new DuplicatedCustomerException("Error: Phone number is existed.");

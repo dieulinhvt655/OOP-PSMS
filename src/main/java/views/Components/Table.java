@@ -12,15 +12,18 @@ import java.util.NoSuchElementException;
 import static java.lang.System.out;
 
 public class Table{
+
   public static <T> void table(List<T> objects){//[{a:1, b:"jkk"},{a:4},{a:0}]
+    if(objects.isEmpty()) throw new NoSuchElementException("The table is empty");
     out.print(" ______");
+
     for(Field field : objects.getFirst().getClass().getDeclaredFields()){
       DisplayedField displayedField = field.getAnnotation(DisplayedField.class);
       if(displayedField != null)
         out.print("_______________________");
     }
     out.println(" ");
-    if(objects.isEmpty()) throw new NoSuchElementException("The table is empty");
+
     //[a,b]
     out.print("|  No  ");
     for(Field field : objects.getFirst().getClass().getDeclaredFields()){

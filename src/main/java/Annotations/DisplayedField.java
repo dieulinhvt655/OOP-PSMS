@@ -4,7 +4,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
+// anntation dùng để chú thích
 @Retention(RetentionPolicy.RUNTIME) // Giữ lại annotation này tại runtime
 @Target(ElementType.FIELD)          // Annotation này chỉ áp dụng cho các trường (field)
 public @interface DisplayedField {
