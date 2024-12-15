@@ -6,7 +6,6 @@ public class Input{
   public static int enterNumber(String message, String error, int min, int max) {
     System.out.print(message + ": ");
     Scanner scanner = new Scanner(System.in);
-
     try{
       int option = scanner.nextInt();
       if ( option < min || option > max) {
@@ -16,10 +15,8 @@ public class Input{
       return option;
     }
     catch(Exception exception) {
-
       System.out.println("Error: " + error);
       return enterNumber(message, error, min, max);
-
     }
   }
 

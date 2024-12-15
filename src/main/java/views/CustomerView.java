@@ -1,18 +1,9 @@
 package views;
-
-import Annotations.DisplayedField;
 import Constants.Options;
 import Constants.Options.Update;
 import models.Customer;
-import models.DTO.Anonymous;
-import models.DTO.PaidOrderDTO;
-import models.Order;
 import views.Components.Input;
-import views.Components.Table;
-
-import javax.swing.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class CustomerView extends BaseView{
   public int menu(){

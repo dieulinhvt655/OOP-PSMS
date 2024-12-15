@@ -77,9 +77,4 @@ public class ProductService{
             .findFirst()
             .get();
   }
-
-  public static void main(String[] args){
-    var p = new Product();
-    System.out.println(p.getPrice());
-  }
 }

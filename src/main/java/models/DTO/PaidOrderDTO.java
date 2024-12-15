@@ -27,13 +27,13 @@ public class PaidOrderDTO{
   }
 
   public PaidOrderDTO(Order order, String customerName){
-
     this.Id = order.getId();
     this.customerId = order.getCustomerId();
     this.customerName = customerName;
     this.date = order.getDate();
     this.isPaid = order.isPaid();
     this.products = order.getProducts();
+
     this.totalPrice = products.stream().map(product -> product.getPrice()*product.getQuantity()).reduce(0.0, Double::sum);
   }
 

@@ -88,10 +88,7 @@ public class OrderService implements BaseService{
       return 0;
     }
   }
-  public void deleteAll(){
-    context.getOrders().removeIf(order -> order.getId()==0);
-    context.saveChange();
-  }
+
 
   public void remove(Order order) {
     context.getOrders().removeIf(order1 -> order1.getId() == order.getId());
